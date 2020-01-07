@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ixtwuko.github.io/</id>
     <title>Indie Moments</title>
-    <updated>2020-01-07T02:04:06.448Z</updated>
+    <updated>2020-01-07T02:10:21.656Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ixtwuko.github.io/"/>
     <link rel="self" href="https://ixtwuko.github.io/atom.xml"/>
@@ -21,38 +21,29 @@
 <p>无需大规模计算的任务场景建议使用虚拟机或WSL。<br>
 对于直接安装，这里简要叙述Ubuntu + Windows的安装方法，安装顺序为Windows &gt; Ubuntu，在支持UEFI的PC上可行。</p>
 <ol>
-<li>
-<p>下载Ubuntu镜像并制作U盘启动盘。在Windows下可以使用Rufus等软件将镜像刻录到U盘，在Ubuntu下使用如下方法：</p>
-<pre><code class="language-bash"># find your USB flash memory's path 
+<li>下载Ubuntu镜像并制作U盘启动盘。在Windows下可以使用Rufus等软件将镜像刻录到U盘，在Ubuntu下可使用如下方法：<pre><code class="language-bash"># find your USB flash memory's path 
 $ sudo fdisk -l
 # write the iso file into USB flash memory 
 $ sudo dd in=/path/to/image.iso of=/dev/sdx
 </code></pre>
 </li>
-<li>
-<p>为Ubuntu准备磁盘空间。在Windows下使用系统自带的分区工具，为Ubuntu的安装整理出一整块的空间。</p>
+<li>为Ubuntu准备磁盘空间。在Windows下使用系统自带的分区工具，为Ubuntu的安装整理出一整块的空间。</li>
+<li>重启并设置U盘为启动项，开始Ubuntu系统的安装。建议的分区方式如下，主分区与home分区的大小可以根据实际情况调整，主分区中占据空间的是软件，home分区中占据空间的个人软件和数据。<pre><code class="language-bash">/     ext4 150G 
+swap  swap #depent on the size of memary
+/boot ext4 512M 
+/home ext4 #remain
+# 8G内存可以划分4G的swap，16G内存可以划分其1/3大小的swap
+# 根据实际需要，可以将一些可能会很大的文件夹单独分区
+/var ext4
+/usr ext4
+</code></pre>
 </li>
-<li>
-<p>重启并设置U盘为启动项，开始Ubuntu系统的安装。建议的分区方式如下，主分区与home分区的大小可以根据实际情况调整，主分区中占据空间的是软件，home分区中占据空间的个人软件和数据。</p>
-<p>/     ext4 150G<br>
-swap  swap #depent on the size of memary<br>
-/boot ext4 512M<br>
-/home ext4 #remain</p>
-<h1 id="8g内存可以划分4g的swap16g内存可以划分其13大小的swap">8G内存可以划分4G的swap，16G内存可以划分其1/3大小的swap</h1>
-<h1 id="根据实际需要可以将一些可能会很大的文件夹单独分区">根据实际需要，可以将一些可能会很大的文件夹单独分区</h1>
-<p>/var ext4<br>
-/usr ext4</p>
-</li>
-<li>
-<p>选择不同的系统引导方式，如果希望直接引导windows，将引导设置到boot分区。</p>
-</li>
+<li>选择不同的系统引导方式，如果希望直接引导windows，将引导设置到boot分区。</li>
 </ol>
 <p>注意：删除Ubuntu时，不能直接删除分区，直接删除会导致错误的引导项。如果引导设置在boot分区，除删除所有的ubuntu分区外，还需删除esp分区中的Ubuntu文件夹，以及使用bootice删除Ubuntu的启动项。</p>
 <h3 id="更换软件源并更新">更换软件源并更新</h3>
 <ol>
-<li>
-<p>为Ubuntu设置国内源：</p>
-<pre><code># backup and modify source.list 
+<li>为Ubuntu设置国内源：<pre><code class="language-bash"># backup and modify source.list 
 $ cp /etc/apt/source.list /etc/apt/source.list.backup 
 $ sudo vim /etc/apt/source.list 
 # add aliyun source 
@@ -60,17 +51,13 @@ $ sudo vim /etc/apt/source.list
 :wq
 </code></pre>
 </li>
-<li>
-<p>更新系统</p>
-<pre><code>$ sudo apt update &amp;&amp; sudo apt upgrade -y
+<li>更新系统<pre><code class="language-basj">$ sudo apt update &amp;&amp; sudo apt upgrade -y
 </code></pre>
 </li>
 </ol>
 <h3 id="更改系统时间">更改系统时间</h3>
 <ol>
-<li>
-<p>在安装Ubuntu + Windows后，可能会出现某个系统的时间不对的情况，是由于Ubuntu将机器时间作为UTC时间，而Windows将机器时间作为本地时间导致的，可以手动进行如下修改并重启。</p>
-<pre><code>$ timedatectl set-local-rtc 1
+<li>在安装Ubuntu + Windows后，可能会出现某个系统的时间不对的情况，是由于Ubuntu将机器时间作为UTC时间，而Windows将机器时间作为本地时间导致的，可以手动进行如下修改并重启。<pre><code class="language-bash">$ timedatectl set-local-rtc 1
 </code></pre>
 </li>
 </ol>
