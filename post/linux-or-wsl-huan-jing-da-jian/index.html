@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Linux-or-WSL-环境搭建 | Indie Moments</title>
-<link rel="shortcut icon" href="https://ixtwuko.github.io//favicon.ico?v=1578363008293">
+<link rel="shortcut icon" href="https://ixtwuko.github.io//favicon.ico?v=1578363538675">
 <link href="https://cdn.remixicon.com/releases/v2.1.0/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://ixtwuko.github.io//styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="Linux-or-WSL-环境搭建 | Indie Moments - Atom Feed" href="https://ixtwuko.github.io//atom.xml">
@@ -26,7 +26,7 @@ Ubuntu系统安装
       <div class="main-content">
         <div class="site-header">
   <a href="https://ixtwuko.github.io/">
-  <img class="avatar" src="https://ixtwuko.github.io//images/avatar.png?v=1578363008293" alt="">
+  <img class="avatar" src="https://ixtwuko.github.io//images/avatar.png?v=1578363538675" alt="">
   </a>
   <h1 class="site-title">
     Indie Moments
@@ -106,7 +106,7 @@ $ sudo dd in=/path/to/image.iso of=/dev/sdx
 </li>
 <li>为Ubuntu准备磁盘空间。在Windows下使用系统自带的分区工具，为Ubuntu的安装整理出一整块的空间。</li>
 <li>重启并设置U盘为启动项，开始Ubuntu系统的安装。建议的分区方式如下，主分区与home分区的大小可以根据实际情况调整，主分区中占据空间的是软件，home分区中占据空间的个人软件和数据。<pre><code class="language-bash">/     ext4 150G 
-swap  swap #depent on the size of memary
+swap  swap #depend on the size of memary
 /boot ext4 512M 
 /home ext4 #remain
 # 8G内存可以划分4G的swap，16G内存可以划分其1/3大小的swap
@@ -128,7 +128,7 @@ $ sudo vim /etc/apt/source.list
 :wq
 </code></pre>
 </li>
-<li>更新系统<pre><code class="language-basj">$ sudo apt update &amp;&amp; sudo apt upgrade -y
+<li>更新系统<pre><code class="language-bash">$ sudo apt update &amp;&amp; sudo apt upgrade -y
 </code></pre>
 </li>
 </ol>
@@ -140,17 +140,13 @@ $ sudo vim /etc/apt/source.list
 </ol>
 <h3 id="安装其它语言">安装其它语言</h3>
 <ol>
-<li>
-<p>以中文语言包为例。</p>
-<pre><code>$ sudo apt install language-pack-zh-hans language-pack-zh-hant
+<li>以中文语言包为例。<pre><code class="language-bash">$ sudo apt install language-pack-zh-hans language-pack-zh-hant
 </code></pre>
 </li>
 </ol>
 <h3 id="安装ssh">安装ssh</h3>
 <ol>
-<li>
-<p>使用openssh</p>
-<pre><code>$ apt install openssh-server
+<li>使用openssh<pre><code class="language-bash">$ apt install openssh-server
 $ service ssh start
 </code></pre>
 </li>
@@ -159,7 +155,7 @@ $ service ssh start
 <ol>
 <li>
 <p>oh-my-zsh</p>
-<pre><code>y# install zsh and change default shell to zsh 
+<pre><code class="language-bash"># install zsh and change default shell to zsh 
 $ apt install zsh 
 $ chsh -s /usr/bin/zsh 
 # install oh-my-zsh 
@@ -175,7 +171,7 @@ $ source ~/.zshrc
 </li>
 <li>
 <p>fish shell</p>
-<pre><code># install fish and change default shell to fish 
+<pre><code class="language-bash"># install fish and change default shell to fish 
 $ apt install fish 
 # open a web server for fish config 
 $ fish_config
@@ -184,9 +180,7 @@ $ fish_config
 </ol>
 <h3 id="处理数据盘">处理数据盘</h3>
 <ol>
-<li>
-<p>Ubuntu无法像Windows一样自动挂载所有的数据盘，数据盘挂载方法如下：</p>
-<pre><code># show the device and find the data disk, for example /dev/vdb
+<li>Ubuntu无法像Windows一样自动挂载所有的数据盘，数据盘挂载方法如下：<pre><code class="language-bash"># show the device and find the data disk, for example /dev/vdb
 $ fdisk -l
 # partition
 $ fdisk /dev/vdb
@@ -201,9 +195,7 @@ $ mount -a
 </ol>
 <h3 id="免密登录">免密登录</h3>
 <ol>
-<li>
-<p>远程服务器的密码登录存在被暴力破解的风险，即使设置复杂的密码，服务器仍会被频繁尝试登录而消耗计算资源。对于远程服务器建立使用私钥登录。</p>
-<pre><code># upload authorized_key file to the server.
+<li>远程服务器的密码登录存在被暴力破解的风险，即使设置复杂的密码，服务器仍会被频繁尝试登录而消耗计算资源。对于远程服务器建立使用私钥登录。<pre><code class="language-bash"># upload authorized_key file to the server.
 $ scp local/path/of/authorized_keys root@server_address:/root/.ssh/
 # modify the config
 $ sudo vim /etc/ssh/sshd_config
@@ -231,9 +223,7 @@ $ sudo service ssh restart
 </ol>
 <h3 id="跨大版本升级">跨大版本升级</h3>
 <ol>
-<li>
-<p>Ubuntu的版本优先选择LTS即长期支持的版本，系统安装多年后需要更新大版时，可以使用如下命令更新。</p>
-<pre><code>$ do-release-upgrade 
+<li>Ubuntu的版本优先选择LTS即长期支持的版本，系统安装多年后需要更新大版时，可以使用如下命令更新。<pre><code class="language-bash">$ do-release-upgrade 
 # if you want to upgrade to the latest non-LTS develoment release, 
 # set Prompt=normal in /etc/update-manager/release-upgrades.
 </code></pre>
@@ -245,7 +235,7 @@ $ sudo service ssh restart
 <ol>
 <li>
 <p>安装一些常用的软件</p>
-<pre><code># git, wget, curl, unzip, vim 
+<pre><code class="language-bash"># git, wget, curl, unzip, vim 
 $ sudo apt install git wget curl unzip vim 
 # gcc g++ make ... cmake clang 
 $ sudo apt install build-essential cmake clang 
@@ -270,11 +260,9 @@ $ sudo update-alternatives --config c++
 </ol>
 <h2 id="三-其它软件">三 其它软件</h2>
 <ul>
-<li>在有桌面环境的Ubuntu中，SSR梯子推荐使用electron-SSR，订阅功能目前可能有Bug。</li>
+<li>在有桌面环境的Ubuntu中，SSR梯子推荐使用electron-SSR。</li>
 <li>在有桌面环境的Ubuntu中，数据备份推荐使用timeshift。</li>
 </ul>
-<h3 id="参考内容">参考内容</h3>
-<p><a href="https://zhuanlan.zhihu.com/p/64151896">Ubuntu 18.04 安装笔记</a></p>
 
               </div>
               <div class="toc-container">
@@ -300,11 +288,7 @@ $ sudo update-alternatives --config c++
 <li><a href="#python%E7%8E%AF%E5%A2%83">Python环境</a></li>
 </ul>
 </li>
-<li><a href="#%E4%B8%89-%E5%85%B6%E5%AE%83%E8%BD%AF%E4%BB%B6">三 其它软件</a>
-<ul>
-<li><a href="#%E5%8F%82%E8%80%83%E5%86%85%E5%AE%B9">参考内容</a></li>
-</ul>
-</li>
+<li><a href="#%E4%B8%89-%E5%85%B6%E5%AE%83%E8%BD%AF%E4%BB%B6">三 其它软件</a></li>
 </ul>
 </li>
 </ul>
