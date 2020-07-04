@@ -1,0 +1,305 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>c++ 编译 | Indie Moments</title>
+<link rel="shortcut icon" href="https://ixtwuko.github.io//favicon.ico?v=1593878723042">
+<link href="https://cdn.remixicon.com/releases/v2.1.0/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://ixtwuko.github.io//styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="c++ 编译 | Indie Moments - Atom Feed" href="https://ixtwuko.github.io//atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="gcc/g++ 命令
+gcc/g++ 是linux下常用的c/c++的编译器，关于gcc是什么、gcc的历史等内容，可以参考这篇GCC编译器30分钟入门教程)或维基。需要注意的是，g++与gcc并不是两个相互独立的编译指令，gcc是通用编译..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://ixtwuko.github.io/">
+  <img class="avatar" src="https://ixtwuko.github.io//images/avatar.png?v=1593878723042" alt="">
+  </a>
+  <h1 class="site-title">
+    Indie Moments
+  </h1>
+  <p class="site-description">
+    
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              c++ 编译
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-07-05
+              </span>
+              <span>
+                5 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h2 id="gccg-命令">gcc/g++ 命令</h2>
+<p>gcc/g++ 是linux下常用的c/c++的编译器，关于gcc是什么、gcc的历史等内容，可以参考这篇<a href="http://c.biancheng.net/gcc/">GCC编译器30分钟入门教程)</a>或维基。需要注意的是，g++与gcc并不是两个相互独立的编译指令，gcc是通用编译指令， 也可以编译c++程序，而g++只能编译c++程序，并且会链接c++的标准库，c++代码推荐使用g++指令。</p>
+<p>对于c或c++源文件较少的项目，可以直接使用gcc命令进行编译，对于源文件较多的项目，更推荐使用编译控制工具如 Makefile、CMake。</p>
+<p>gcc的编译过程有以下4步：</p>
+<ul>
+<li>进行源程序的预处理，生成<code>.i</code>文件；</li>
+<li>将<code>.i</code>文件编译成汇编语言，生成<code>.s</code>文件；</li>
+<li>汇编，生成目标文件<code>.o</code>文件；</li>
+<li>将多个<code>.o</code>文件链接为最终的可执行文件或库文件。</li>
+</ul>
+<!-- more -->
+<h3 id="常用gccg命令参数">常用gcc/g++命令参数</h3>
+<p>编译单个源文件，生成可执行程序</p>
+<pre><code class="language-bash">$ g++ source.cpp    # 默认生成 a.out
+$ g++ source.cpp -o single
+</code></pre>
+<p>编译多个源文件，生成可执行程序</p>
+<pre><code class="language-bash">$ g++ source-1.cpp source-2.cpp -o main
+</code></pre>
+<p>只完成预编译，即只完成第1步</p>
+<pre><code class="language-bash">$ g++ -E source.cpp
+</code></pre>
+<p>只完成生成汇编语言，即完成前2步</p>
+<pre><code class="language-bash">$ g++ -S source.cpp
+</code></pre>
+<p>生成目标文件但不进行链接，即完成前3步</p>
+<pre><code class="language-bash">$ g++ -c source.cpp
+</code></pre>
+<p>创建静态库</p>
+<pre><code class="language-bash">$ g++ -c source-1.cpp source-2.cpp
+$ ar rcs libsource.a source-1.o source-2.o
+# ar命令是用来生成archive文件的指令，静态库就是archive文件
+# r 替换或添加目标文件； c 不管是否存在都创建；
+# s 创建目标文件索引，在较大的库时能够提高速度。
+
+# 注意使用库还需要对应的头文件
+# 使用静态库
+$ g++ uselib.cpp libsource.a -o use
+</code></pre>
+<p>创建动态库</p>
+<pre><code class="language-bash">$ g++ -shared -fPIC source.cpp -o libsource.so
+# 使用动态库
+$ g++ uselib.cpp libsource.so -o use
+# 动态链接库需要在特定位置才能执行程序
+</code></pre>
+<p>链接其他位置的库</p>
+<pre><code class="language-bash"># 链接 /dir/lib/ 处的 libsource.a(so) 库
+$ g++ uselib.cpp -L /dir/lib -lsource
+</code></pre>
+<p>指定额外的头文件</p>
+<pre><code class="language-bash"># 使用 /dir/include/ 处的头文件
+$ g++ source.cpp -I /dir/include
+</code></pre>
+<p>在编译的同时产生调试信息，搭配gdb工具使用</p>
+<pre><code class="language-bash">$ g++ -g source.cpp
+</code></pre>
+<p>控制警告信息</p>
+<pre><code class="language-bash">$ g++ -Wall source.cpp  # 发出所用警告
+$ g++ -w source.cpp     # 关闭警告
+</code></pre>
+<p>设置c++的标准</p>
+<pre><code class="language-bash">$ g++ -std=c++11 source.cpp
+# 其他的选项如 c++98 c++03 c++14 c++17
+</code></pre>
+<p>禁止使用动态库</p>
+<pre><code class="language-bash">$ g++ source.cpp -static
+# 默认会尽量使用动态库
+</code></pre>
+<p>优化选项</p>
+<pre><code class="language-bash">$ g++ source.cpp -O0
+# -O0 没有优化
+# -O1 默认选项
+# -O2
+# -O3 优化级别最高
+</code></pre>
+<h2 id="gdb调试器">gdb调试器</h2>
+<p>在linux下开发c++程序，可能会使用到gdb调试器，尤其是在某些无法使用IDE的情形下，可以直接使用gdb进行调试。<br>
+使用gdb调试程序前，需要使用特定的参数编译c++程序，然后就可以使用gdb指令进入调试环境</p>
+<pre><code class="language-bash">$ g++ -g source.cpp -o source # -g 参数用来生成调试用的信息
+$ gdb source
+</code></pre>
+<p>下面介绍一些常用的调试指令</p>
+<pre><code class="language-bash">(gdb) l     # list       列出源文件的内容
+(gdb) b 5   # breakpoint 设置断点，在第5行
+(gdb) r     # run        执行到断点处
+(gdb) p var # print      打印变量的值
+(gdb) n     # next       单步调试
+(gdb) c     # continue   继续执行
+(gdb) q     # quit       退出调试
+</code></pre>
+<h2 id="clang-命令">clang 命令</h2>
+<p>clang也是c/c++等多种语言的编译器，是gcc的替代品，提供更好的错误提示。在对Apple公司使用的Object-c有更好的支持，是MacOS下XCode的默认编译器。clang命令与gcc/g++命令的基本相同，在linux系统下安装方法如下</p>
+<pre><code class="language-bash">$ sudo apt install llvm
+$ sudo apt install clang
+</code></pre>
+<p>可以将系统的默认编译器替换为clang</p>
+<pre><code class="language-bash"># change default compiler to clang
+# run these command and choose the clang
+$ sudo update-alternatives --config cc
+$ sudo update-alternatives --config c++
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#gccg-%E5%91%BD%E4%BB%A4">gcc/g++ 命令</a>
+<ul>
+<li><a href="#%E5%B8%B8%E7%94%A8gccg%E5%91%BD%E4%BB%A4%E5%8F%82%E6%95%B0">常用gcc/g++命令参数</a></li>
+</ul>
+</li>
+<li><a href="#gdb%E8%B0%83%E8%AF%95%E5%99%A8">gdb调试器</a></li>
+<li><a href="#clang-%E5%91%BD%E4%BB%A4">clang 命令</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://ixtwuko.github.io/post/gridea-bo-ke-huan-jing-hui-fu/">
+              <h3 class="post-title">
+                Gridea 博客环境恢复
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '045884b5ac08cd06c808',
+    clientSecret: '7df445998664ac0374cee3c01de29dcdd8c6af5f',
+    repo: 'ixtwuko.github.io',
+    owner: 'ixtWuko',
+    admin: ['ixtWuko'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://ixtwuko.github.io//atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
