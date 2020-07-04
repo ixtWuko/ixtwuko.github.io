@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ixtwuko.github.io/</id>
     <title>Indie Moments</title>
-    <updated>2020-07-04T16:08:08.316Z</updated>
+    <updated>2020-07-04T16:09:02.762Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ixtwuko.github.io/"/>
     <link rel="self" href="https://ixtwuko.github.io/atom.xml"/>
@@ -10,7 +10,7 @@
     <icon>https://ixtwuko.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Indie Moments</rights>
     <entry>
-        <title type="html"><![CDATA[c++ 编译]]></title>
+        <title type="html"><![CDATA[C++ 编译]]></title>
         <id>https://ixtwuko.github.io/post/cpp-compile/</id>
         <link href="https://ixtwuko.github.io/post/cpp-compile/">
         </link>
@@ -18,17 +18,11 @@
         <summary type="html"><![CDATA[<h2 id="gccg-命令">gcc/g++ 命令</h2>
 <p>gcc/g++ 是linux下常用的c/c++的编译器，关于gcc是什么、gcc的历史等内容，可以参考这篇<a href="http://c.biancheng.net/gcc/">GCC编译器30分钟入门教程)</a>或维基。需要注意的是，g++与gcc并不是两个相互独立的编译指令，gcc是通用编译指令， 也可以编译c++程序，而g++只能编译c++程序，并且会链接c++的标准库，c++代码推荐使用g++指令。</p>
 <p>对于c或c++源文件较少的项目，可以直接使用gcc命令进行编译，对于源文件较多的项目，更推荐使用编译控制工具如 Makefile、CMake。</p>
-<p>gcc的编译过程有以下4步：</p>
-<ul>
-<li>进行源程序的预处理，生成<code>.i</code>文件；</li>
-<li>将<code>.i</code>文件编译成汇编语言，生成<code>.s</code>文件；</li>
-<li>汇编，生成目标文件<code>.o</code>文件；</li>
-<li>将多个<code>.o</code>文件链接为最终的可执行文件或库文件。</li>
-</ul>
 ]]></summary>
         <content type="html"><![CDATA[<h2 id="gccg-命令">gcc/g++ 命令</h2>
 <p>gcc/g++ 是linux下常用的c/c++的编译器，关于gcc是什么、gcc的历史等内容，可以参考这篇<a href="http://c.biancheng.net/gcc/">GCC编译器30分钟入门教程)</a>或维基。需要注意的是，g++与gcc并不是两个相互独立的编译指令，gcc是通用编译指令， 也可以编译c++程序，而g++只能编译c++程序，并且会链接c++的标准库，c++代码推荐使用g++指令。</p>
 <p>对于c或c++源文件较少的项目，可以直接使用gcc命令进行编译，对于源文件较多的项目，更推荐使用编译控制工具如 Makefile、CMake。</p>
+<!-- more -->
 <p>gcc的编译过程有以下4步：</p>
 <ul>
 <li>进行源程序的预处理，生成<code>.i</code>文件；</li>
@@ -36,7 +30,6 @@
 <li>汇编，生成目标文件<code>.o</code>文件；</li>
 <li>将多个<code>.o</code>文件链接为最终的可执行文件或库文件。</li>
 </ul>
-<!-- more -->
 <h3 id="常用gccg命令参数">常用gcc/g++命令参数</h3>
 <p>编译单个源文件，生成可执行程序</p>
 <pre><code class="language-bash">$ g++ source.cpp    # 默认生成 a.out
