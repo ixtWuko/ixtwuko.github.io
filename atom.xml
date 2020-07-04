@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ixtwuko.github.io/</id>
     <title>Indie Moments</title>
-    <updated>2020-07-04T16:05:29.979Z</updated>
+    <updated>2020-07-04T16:08:08.316Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ixtwuko.github.io/"/>
     <link rel="self" href="https://ixtwuko.github.io/atom.xml"/>
@@ -11,8 +11,8 @@
     <rights>All rights reserved 2020, Indie Moments</rights>
     <entry>
         <title type="html"><![CDATA[c++ 编译]]></title>
-        <id>https://ixtwuko.github.io/post/c-bian-yi/</id>
-        <link href="https://ixtwuko.github.io/post/c-bian-yi/">
+        <id>https://ixtwuko.github.io/post/cpp-compile/</id>
+        <link href="https://ixtwuko.github.io/post/cpp-compile/">
         </link>
         <updated>2020-07-04T16:04:09.000Z</updated>
         <summary type="html"><![CDATA[<h2 id="gccg-命令">gcc/g++ 命令</h2>
@@ -130,37 +130,11 @@ $ sudo update-alternatives --config c++
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[Gridea 博客环境恢复]]></title>
-        <id>https://ixtwuko.github.io/post/gridea-bo-ke-huan-jing-hui-fu/</id>
-        <link href="https://ixtwuko.github.io/post/gridea-bo-ke-huan-jing-hui-fu/">
-        </link>
-        <updated>2020-01-07T02:22:56.000Z</updated>
-        <summary type="html"><![CDATA[<ol>
-<li>安装 git 与 Gridea。</li>
-<li>GitHub &gt; Settings &gt; Develop settings &gt; Personal access tokens 中，会有以前创建的关于 Gridea 的 token，但是已经无法查看。如果以前有保存在其它地方，找到这个 token；否则只能重新生成。（直接尝试第3步）</li>
-<li>进入 Gridea 设置，设置站点源文件目录，站点源文件可以使用云盘同步。</li>
-<li>进入 Gridea 远程设置，基础配置中除CNAME外均需设置，评论配置可根据需要设置。</li>
-<li>进入主题设置，确认主题设置无误。</li>
-<li>同步一次测试设置是否正确，之后就可以进行其它博客的操作了。</li>
-</ol>
-]]></summary>
-        <content type="html"><![CDATA[<ol>
-<li>安装 git 与 Gridea。</li>
-<li>GitHub &gt; Settings &gt; Develop settings &gt; Personal access tokens 中，会有以前创建的关于 Gridea 的 token，但是已经无法查看。如果以前有保存在其它地方，找到这个 token；否则只能重新生成。（直接尝试第3步）</li>
-<li>进入 Gridea 设置，设置站点源文件目录，站点源文件可以使用云盘同步。</li>
-<li>进入 Gridea 远程设置，基础配置中除CNAME外均需设置，评论配置可根据需要设置。</li>
-<li>进入主题设置，确认主题设置无误。</li>
-<li>同步一次测试设置是否正确，之后就可以进行其它博客的操作了。</li>
-</ol>
-<!-- more -->
-]]></content>
-    </entry>
-    <entry>
         <title type="html"><![CDATA[Linux or WSL 环境搭建]]></title>
-        <id>https://ixtwuko.github.io/post/linux-or-wsl-huan-jing-da-jian/</id>
-        <link href="https://ixtwuko.github.io/post/linux-or-wsl-huan-jing-da-jian/">
+        <id>https://ixtwuko.github.io/post/linux-or-wsl-environments/</id>
+        <link href="https://ixtwuko.github.io/post/linux-or-wsl-environments/">
         </link>
-        <updated>2020-01-07T01:59:55.000Z</updated>
+        <updated>2020-01-08T01:59:55.000Z</updated>
         <summary type="html"><![CDATA[<h2 id="一-系统设置">一 系统设置</h2>
 <h3 id="ubuntu-系统安装">Ubuntu 系统安装</h3>
 <p>临时的无需大规模计算的任务场景建议使用虚拟机或 WSL。</p>
@@ -334,6 +308,32 @@ $ sudo apt install build-essential cmake clang llvm
 <li>在有桌面环境的 Ubuntu 中，SSR 梯子推荐使用 electron-SSR。</li>
 <li>在有桌面环境的 Ubuntu 中，数据备份推荐使用 timeshift。</li>
 </ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Gridea 博客环境恢复]]></title>
+        <id>https://ixtwuko.github.io/post/gridea-bo-ke-huan-jing-hui-fu/</id>
+        <link href="https://ixtwuko.github.io/post/gridea-bo-ke-huan-jing-hui-fu/">
+        </link>
+        <updated>2020-01-07T02:22:56.000Z</updated>
+        <summary type="html"><![CDATA[<ol>
+<li>安装 git 与 Gridea。</li>
+<li>GitHub &gt; Settings &gt; Develop settings &gt; Personal access tokens 中，会有以前创建的关于 Gridea 的 token，但是已经无法查看。如果以前有保存在其它地方，找到这个 token；否则只能重新生成。（直接尝试第3步）</li>
+<li>进入 Gridea 设置，设置站点源文件目录，站点源文件可以使用云盘同步。</li>
+<li>进入 Gridea 远程设置，基础配置中除CNAME外均需设置，评论配置可根据需要设置。</li>
+<li>进入主题设置，确认主题设置无误。</li>
+<li>同步一次测试设置是否正确，之后就可以进行其它博客的操作了。</li>
+</ol>
+]]></summary>
+        <content type="html"><![CDATA[<ol>
+<li>安装 git 与 Gridea。</li>
+<li>GitHub &gt; Settings &gt; Develop settings &gt; Personal access tokens 中，会有以前创建的关于 Gridea 的 token，但是已经无法查看。如果以前有保存在其它地方，找到这个 token；否则只能重新生成。（直接尝试第3步）</li>
+<li>进入 Gridea 设置，设置站点源文件目录，站点源文件可以使用云盘同步。</li>
+<li>进入 Gridea 远程设置，基础配置中除CNAME外均需设置，评论配置可根据需要设置。</li>
+<li>进入主题设置，确认主题设置无误。</li>
+<li>同步一次测试设置是否正确，之后就可以进行其它博客的操作了。</li>
+</ol>
+<!-- more -->
 ]]></content>
     </entry>
 </feed>
