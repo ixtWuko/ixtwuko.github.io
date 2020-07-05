@@ -1,97 +1,102 @@
 <html>
-  <head>
-    <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Linux or WSL 环境搭建 | Indie Moments</title>
-<link rel="shortcut icon" href="https://ixtwuko.github.io//favicon.ico?v=1593878939456">
-<link href="https://cdn.remixicon.com/releases/v2.1.0/remixicon.css" rel="stylesheet">
+<link rel="shortcut icon" href="https://ixtwuko.github.io//favicon.ico?v=1593917558565">
+<link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
 <link rel="stylesheet" href="https://ixtwuko.github.io//styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="Linux or WSL 环境搭建 | Indie Moments - Atom Feed" href="https://ixtwuko.github.io//atom.xml">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/go.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
 
 
 
-    <meta name="description" content="一 系统设置
-Ubuntu 系统安装
-临时的无需大规模计算的任务场景建议使用虚拟机或 WSL。
-对于直接安装，这里简要叙述 Ubuntu + Windows 的安装方法，安装顺序为 Windows &gt; Ubuntu，在支持 UEFI ..." />
-    <meta name="keywords" content="" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
-    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-  </head>
-  <body>
-    <div class="main">
-      <div class="main-content">
-        <div class="site-header">
-  <a href="https://ixtwuko.github.io/">
-  <img class="avatar" src="https://ixtwuko.github.io//images/avatar.png?v=1593878939456" alt="">
-  </a>
-  <h1 class="site-title">
-    Indie Moments
-  </h1>
-  <p class="site-description">
-    
-  </p>
-  <div class="menu-container">
-    
-      
-        <a href="/" class="menu">
-          首页
-        </a>
-      
-    
-      
-        <a href="/archives" class="menu">
-          归档
-        </a>
-      
-    
-      
-        <a href="/tags" class="menu">
-          标签
-        </a>
-      
-    
-      
-        <a href="/post/about" class="menu">
-          关于
-        </a>
-      
-    
-  </div>
-  <div class="social-container">
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  </div>
-</div>
-
-        <div class="post-detail">
-          <article class="post">
-            <h2 class="post-title">
-              Linux or WSL 环境搭建
-            </h2>
-            <div class="post-info">
-              <span>
-                2020-01-08
-              </span>
-              <span>
-                6 min read
-              </span>
-              
-            </div>
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Indie Moments
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
             
-            <div class="post-content-wrapper">
-              <div class="post-content">
-                <h2 id="一-系统设置">一 系统设置</h2>
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+    </div>
+</nav>
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    Linux or WSL 环境搭建
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2020-01-08 ·
+                    </time>
+                    
+                </div>
+                <div class="post-content">
+                    <h2 id="一-系统设置">一 系统设置</h2>
 <h3 id="ubuntu-系统安装">Ubuntu 系统安装</h3>
 <p>临时的无需大规模计算的任务场景建议使用虚拟机或 WSL。</p>
 <p>对于直接安装，这里简要叙述 Ubuntu + Windows 的安装方法，安装顺序为 Windows &gt; Ubuntu，在支持 UEFI 的 PC 上可行。对于直接安装Ubuntu单系统的，也可以参考此方法。</p>
@@ -260,54 +265,24 @@ $ sudo apt install build-essential cmake clang llvm
 <li>在有桌面环境的 Ubuntu 中，数据备份推荐使用 timeshift。</li>
 </ul>
 
-              </div>
-              <div class="toc-container">
-                <ul class="markdownIt-TOC">
-<li>
-<ul>
-<li><a href="#%E4%B8%80-%E7%B3%BB%E7%BB%9F%E8%AE%BE%E7%BD%AE">一 系统设置</a>
-<ul>
-<li><a href="#ubuntu-%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85">Ubuntu 系统安装</a></li>
-<li><a href="#%E6%9B%B4%E6%8D%A2%E8%BD%AF%E4%BB%B6%E6%BA%90%E5%B9%B6%E6%9B%B4%E6%96%B0">更换软件源并更新</a></li>
-<li><a href="#%E6%9B%B4%E6%94%B9%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4">更改系统时间</a></li>
-<li><a href="#%E5%AE%89%E8%A3%85%E5%85%B6%E5%AE%83%E8%AF%AD%E8%A8%80">安装其它语言</a></li>
-<li><a href="#%E5%AE%89%E8%A3%85-ssh">安装 ssh</a></li>
-<li><a href="#%E6%9B%BF%E6%8D%A2-shell">替换 Shell</a></li>
-<li><a href="#%E5%A4%84%E7%90%86%E6%95%B0%E6%8D%AE%E7%9B%98">处理数据盘</a></li>
-<li><a href="#%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95">免密登录</a></li>
-<li><a href="#%E8%B7%A8%E5%A4%A7%E7%89%88%E6%9C%AC%E5%8D%87%E7%BA%A7">跨大版本升级</a></li>
-</ul>
-</li>
-<li><a href="#%E4%BA%8C-%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83">二 编译环境</a>
-<ul>
-<li><a href="#cpp-%E7%8E%AF%E5%A2%83">Cpp 环境</a></li>
-<li><a href="#python-%E7%8E%AF%E5%A2%83">Python 环境</a></li>
-</ul>
-</li>
-<li><a href="#%E4%B8%89-%E5%85%B6%E5%AE%83%E8%BD%AF%E4%BB%B6">三 其它软件</a></li>
-</ul>
-</li>
-</ul>
-
-              </div>
-            </div>
-          </article>
+                </div>
+            </article>
         </div>
 
         
-          <div class="next-post">
-            <div class="next">下一篇</div>
-            <a href="https://ixtwuko.github.io/post/gridea-bo-ke-huan-jing-hui-fu/">
-              <h3 class="post-title">
-                Gridea 博客环境恢复
-              </h3>
-            </a>
-          </div>
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://ixtwuko.github.io/post/gridea-bo-ke-huan-jing-hui-fu/" class="post-title gt-a-link">
+                    Gridea 博客环境恢复
+                </a>
+            </div>
         
 
         
-          
-            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+
+        
+            
+                <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
 <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
 
 <div id="gitalk-container"></div>
@@ -320,7 +295,7 @@ $ sudo apt install build-essential cmake clang llvm
     repo: 'ixtwuko.github.io',
     owner: 'ixtWuko',
     admin: ['ixtWuko'],
-    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    id: location.pathname,      // Ensure uniqueness and length less than 50
     distractionFreeMode: false  // Facebook-like distraction free mode
   })
 
@@ -328,60 +303,44 @@ $ sudo apt install build-essential cmake clang llvm
 
 </script>
 
-          
+            
 
-          
+            
         
 
-        <div class="site-footer">
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
-  <a class="rss" href="https://ixtwuko.github.io//atom.xml" target="_blank">
-    <i class="ri-rss-line"></i> RSS
-  </a>
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first"></div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://ixtwuko.github.io//atom.xml" target="_blank">RSS</a></a>
+    </div>
 </div>
 
-      </div>
+<script>
+    hljs.initHighlightingOnLoad()
+</script>
+
     </div>
-
-    <script>
-      hljs.initHighlightingOnLoad()
-
-      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
-
-      // This should probably be throttled.
-      // Especially because it triggers during smooth scrolling.
-      // https://lodash.com/docs/4.17.10#throttle
-      // You could do like...
-      // window.addEventListener("scroll", () => {
-      //    _.throttle(doThatStuff, 100);
-      // });
-      // Only not doing it here to keep this Pen dependency-free.
-
-      window.addEventListener("scroll", event => {
-        let fromTop = window.scrollY;
-
-        mainNavLinks.forEach((link, index) => {
-          let section = document.getElementById(decodeURI(link.hash).substring(1));
-          let nextSection = null
-          if (mainNavLinks[index + 1]) {
-            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
-          }
-          if (section.offsetTop <= fromTop) {
-            if (nextSection) {
-              if (nextSection.offsetTop > fromTop) {
-                link.classList.add("current");
-              } else {
-                link.classList.remove("current");    
-              }
-            } else {
-              link.classList.add("current");
-            }
-          } else {
-            link.classList.remove("current");
-          }
-        });
-      });
-
-    </script>
-  </body>
+</div>
+</body>
 </html>
