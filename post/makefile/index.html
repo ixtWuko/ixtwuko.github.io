@@ -1,0 +1,360 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>如何写 makefile | Indie Moments</title>
+<link rel="shortcut icon" href="https://ixtwuko.github.io//favicon.ico?v=1594302346423">
+<link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
+<link rel="stylesheet" href="https://ixtwuko.github.io//styles/main.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/go.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Indie Moments
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+    </div>
+</nav>
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    如何写 makefile
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2020-07-09 ·
+                    </time>
+                    
+                </div>
+                <div class="post-content">
+                    <p>对于源文件较多的项目，直接使用gcc/clang进行编译会十分麻烦，makefile可以解决这一问题。Makefile记录了项目的编译规则，当使用make命令进行项目的编译时，make命令会使用makefile中记录的规则，一步步地编译、链接，生成目标程序；同时已经make过的项目再次make时，只会重新编译发生修改过的源文件，一定程度上能够节省编译时间。</p>
+<!-- more -->
+<p>makefile 文件包含五种成分：显式规则、隐晦规则、变量定义、文件指示、注释。其中隐晦规则指make命令能够自动推导的命令，可以省略规则中的某些元素；文件指示指makefile引用其它makefile，或者指定使用makefile哪一部分的规则。一个makefile的基本成分如下所示：</p>
+<pre><code class="language-makefile">target : prerequisites
+    command
+# target 为该步骤的目标，可以是目标文件、执行文件、标签
+# prerequisites 为目标所依赖的成分，可以是源文件、目标文件、标签
+# command 为生成上述目标所进行的shell命令
+# 目标 : 依赖
+#     shell命令
+</code></pre>
+<h3 id="注释">注释</h3>
+<p>makefile中使用 <code>#</code> 来标记注释。</p>
+<h3 id="显示规则">显示规则</h3>
+<p>下面是一个makefile文件的例子。</p>
+<pre><code class="language-makefile"># 使用 main.cpp, a.cpp, b.cpp, c.cpp 生成目标程序 main
+# ---------------------
+main : main.o a.o b.o c.o
+    c++ -o main main.o a.o b.o c.o
+main.o : main.cpp
+    c++ -c main.cpp
+a.o : a.cpp
+    c++ -c a.cpp
+b.o : b.cpp
+    c++ -c b.cpp
+c.o : c.cpp
+    c++ -c c.cpp
+    
+.PHOMY : clean    # 声明 clean 为一个伪目标
+clean :           # 没有依赖的规则，make命令不会自动执行，需要使用形如 make clean 这样的形式才能执行
+	rm main *.o
+# --------------------
+</code></pre>
+<p>下面是makefile中生成规则的一些细节：</p>
+<ul>
+<li>通过比较目标与它的依赖间修改时间的差异，只要依赖中有比目标新的文件，就重新生成目标。</li>
+<li>在一条规则中，可以有多个目标，使用空格分割；可以有多条shell命令。</li>
+<li>多条 shell 命令可以放入多行，此时 shell 命令会放入不同的进程执行；如果后面 shell 命令依赖前面 shell 命令的效果，则两条 shell 命令使用 <code>;</code> 分割。<code>\</code> 可以折行。</li>
+<li>make命令默认将每一条shell命令打印出来，如果不想打印命令，在shell命令前加 <code>@</code>。<br>
+如果不要求make检查shell命令的执行是否正确，在其前加 <code>-</code>。</li>
+<li>makefile中可以使用的通配符与 shell 中相同，<code>*</code> <code>?</code>；也使用 <code>~</code> 指代用户文件夹。</li>
+</ul>
+<p>上述例子为生成执行程序的规则，下面介绍生产静态库(Archive File)的规则：</p>
+<pre><code class="language-makefile">somelib(a.o) a.o
+    ar rc somelib a.o
+</code></pre>
+<h3 id="使用变量">使用变量</h3>
+<p>makefile文件中的变量，类似于 c 文件中的宏定义，起替换文本的作用。下面是一个使用变量的例子。</p>
+<pre><code class="language-makefile">objects = main.o a.o b.o c.o
+
+main : $(object)
+	c++ -o main $(object)
+</code></pre>
+<p>使用变量时的四种赋值运算符：</p>
+<ul>
+<li><code>x = $(y)</code> 懒求值，在运行时求值；</li>
+<li><code>x := $(y)</code> 立即求值，在定义时求值；</li>
+<li><code>x ?= $(y)</code> 只有当 x 不存在时才定义 x；</li>
+<li><code>x += $(y)</code> 追加。</li>
+</ul>
+<p>上述四种运算符中的前两种比较容易迷惑人，下面以一个例子说明其差别：</p>
+<pre><code class="language-makefile"># 使用 = 
+x = hello
+y = $(x) world
+echo $(y) # -&gt; hello world
+
+x = hi
+echo $(y) # -&gt; hi world
+
+# 使用 :=
+x = hello
+y := $(x) world
+# 立即求值，在这里已经将 y 中的 $(x) 替换了，后面x的变化不会影响y
+echo $(y) # -&gt; hello world
+
+x = hi
+echo $(y) # -&gt; hello world
+</code></pre>
+<p>赋值运算符另一个需要注意的地方是：不要在赋值语句的后面添加注释，因为注释前的空格会添加到变量里面，产生不可预期的结果。</p>
+<p>变量的高级用法——变量值替换</p>
+<pre><code class="language-makefile">sources = a.cpp b.cpp c.cpp
+objects = $(sources:%.cpp=%.o)
+</code></pre>
+<h4 id="内置变量">内置变量</h4>
+<pre><code class="language-makefile">$(AR)    # 生产 archive 文件的默认程序 ar
+$(CC)    # 编译 C 代码的默认编译器 cc
+$(CXX)   # 编译 C++ 代码的默认编译器 g++
+
+$(ARFLAGS)   # ar 的参数 'rv'
+$(CFLAGS)    # 编译 C 代码的参数 
+$(CXXFLAGS)  # 编译 C++ 代码的参数
+$(CPPFLAGS)  # C 代码预编译的参数
+</code></pre>
+<h4 id="条件">条件</h4>
+<pre><code class="language-makefile">objects = main.o a.o b.o c.o
+
+main : objects
+ifeq ($(CXX), g++) # 这里的 $(CXX) 是内置变量
+    $(CXX) -o main $(objects) $(libs_for_g++)
+else
+    $(CXX) -o main $(objects) $(normal_libs)
+endif
+
+# 其他的 ifneq, ifdef var_name, ifndef var_name
+</code></pre>
+<h4 id="函数">函数</h4>
+<pre><code class="language-makefile"># (function arguments)
+$(wildcard src/*.cpp)             # 通配符匹配的部分 
+$(subst .cpp,.o,$(sources))       # 字符串替换
+$(patsubst %.cpp,%.o,$(sources))  # 模式字符串替换
+$(strip $(string))                # 去掉字符串开头和结尾的空格
+
+$(dir src/foo.c)         # 取文件目录，得到 src/
+$(notdir src/foo.c)      # 取文件名，得到 foo.c
+$(suffix src/foo.c)      # 取尾缀，得到 .c
+$(basename src/foo.c)    # 取前缀，得到 src/foo
+$(addsuffix .c,src/foo)  # 加尾缀，得到 src/foo.c
+$(addprefix src/,foo.c)  # 加前缀，得到 src/foo.c
+
+$(foreach n,$(names),$(n).o)  # 循环，将 names 中的每一个都添加 .o
+$(shell cat foo)              # 执行 shell 命令
+
+$(warning &quot;test&quot;)
+$(error &quot;test&quot;)
+</code></pre>
+<h3 id="隐晦规则">隐晦规则</h3>
+<p>一些在 makefile 经常用到的规则，make会为我们自动生成。下面是一些常用的隐含规则：</p>
+<ul>
+<li>
+<p>编译 C 代码：自动将 name.c 生成 name.o，生成命令为 <code>$(CC) -c $(CPPFLLAGS) $(CFLAGS)</code> 。</p>
+</li>
+<li>
+<p>编译 C++ 代码：自动将 name.cc 生产 name.o，生成命令为 <code>$(CXX) -c $(CPPFLAGS) $(CXXFLAGS)</code> 。</p>
+</li>
+<li>
+<p>链接 Object 文件：自动将一个或多个 Object 文件链接成执行文件。如 <code>main : main.o a.o</code> ，将会执行下面的命令：</p>
+<pre><code class="language-makefile">cc -c main.c -o main.o
+cc -c a.c -o a.o
+cc main.o a.o -o main
+rm -f main.o
+rm -f a.o
+</code></pre>
+</li>
+<li>
+<p>生产静态库的规则也可以自动推导，如 <code>somelib(a.o b.o)</code> 将会执行下面的命令：</p>
+<pre><code class="language-makefile">cc -c a.c -o a.o
+cc -c b.c -o b.o
+ar r somelib.a a.o b.o
+rm -f a.o
+rm -f b.o
+</code></pre>
+</li>
+</ul>
+<h4 id="使用模式规则">使用模式规则</h4>
+<p><code>%</code> 在makefile中表示任意长度的非空字符串，模式规则指使用 <code>%</code> 定义的规则，可以达到一条规则处理多个目标的目的。下面以例子说明模式规则以及自动变量的用法：</p>
+<pre><code class="language-makefile"># 将所有的 .cpp 文件编译成对应的 .o 文件
+%.o : %.cpp
+    $(CXX) -c $(CPPFLAGS) $(CXXFLAGS) $&lt; -o $@
+# $@ 为当前目标，$&lt; 为当前第1个依赖，这两个为自动变量。
+# 类似于迭代器，每次会取一个目标和依赖执行命令，将所有符合模式的文件全部迭代。
+</code></pre>
+<p>总结一下常用的自动变量：</p>
+<pre><code class="language-makefile">$@    # 目标
+$&lt;    # 第1个依赖
+$?    # 比目标新的依赖
+$^    # 所有依赖，会去除重复的
+$+    # 所以依赖，不会去除重复的
+$*    # 模式匹配到的部分，即 % 代表的部分
+$(@D) $(@F)    # $@ 的目录名和文件名
+# 其他的自动变量也可以构造类似的，获得目录名和文件名
+</code></pre>
+<h3 id="文件指示">文件指示</h3>
+<p>文件指示指在 makefile 中引用其他的 makefile 文件。</p>
+<pre><code class="language-makefile">include foo.make *.make  # 引用其他的 makefile
+</code></pre>
+<h3 id="make-命令">make 命令</h3>
+<p>在 make 命令使用中经常看到的 all、clean、install、test等，都是伪目标，需要在makefile中制定这些伪目标所要求的行为。</p>
+<p>make命令的常用参数：</p>
+<pre><code class="language-bash">-f filename     # 指定makefile文件
+-I include_dir  # 在该目录下搜索 makefile
+-j jobnum       # 指定 job 数量，默认 make会运行尽量多的 job
+</code></pre>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://ixtwuko.github.io/post/cpp-compile/" class="post-title gt-a-link">
+                    C++ 编译
+                </a>
+            </div>
+        
+
+        
+
+        
+            
+                <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '045884b5ac08cd06c808',
+    clientSecret: '7df445998664ac0374cee3c01de29dcdd8c6af5f',
+    repo: 'ixtwuko.github.io',
+    owner: 'ixtWuko',
+    admin: ['ixtWuko'],
+    id: location.pathname,      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+            
+
+            
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first"></div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://ixtwuko.github.io//atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+    hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>
