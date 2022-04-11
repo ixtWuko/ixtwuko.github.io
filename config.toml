@@ -1,0 +1,4 @@
+baseURL = 'http://ixtwuko.github.io/'
+languageCode = 'zh-cn'
+title = 'My New Hugo Site'
+theme = 'ananke'
