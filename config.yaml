@@ -1,0 +1,13 @@
+languageCode: zh
+defaultContentLanguage: zh
+defaultContentLanguageInSubdir: false
+hasCJKLanguage: true
+timeZone: CN
+
+theme: ananke
+
+baseURL: http://ixtwuko.github.io/
+title: Easy Easy
+copyright: &copy 2022 施工中
+
+summaryLength: 75
