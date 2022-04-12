@@ -2,7 +2,7 @@ languageCode: zh
 defaultContentLanguage: zh
 defaultContentLanguageInSubdir: false
 hasCJKLanguage: true
-timeZone: CN
+timeZone: Asia/Shanghai
 
 theme: ananke
 
